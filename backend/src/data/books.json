@@ -1,0 +1,137 @@
+{
+  "books": [
+    {
+      "id": "978-0-002",
+      "title": "Beyond the Horizon",
+      "author": "Michael R. Thompson",
+      "publishedDate": "2023-06-22",
+      "availableCopies": 5
+    },
+    {
+      "id": "978-0-003",
+      "title": "Digital Dreams",
+      "author": "Alexandra Chen",
+      "publishedDate": "2023-01-10",
+      "availableCopies": 3
+    },
+    {
+      "id": "978-0-004",
+      "title": "The Last Garden",
+      "author": "James Wilson",
+      "publishedDate": "2023-04-30",
+      "availableCopies": 6
+    },
+    {
+      "id": "978-0-005",
+      "title": "Midnight in Madrid",
+      "author": "Isabella Rodriguez",
+      "publishedDate": "2023-02-14",
+      "availableCopies": 4
+    },
+    {
+      "id": "978-0-006",
+      "title": "The Quantum Paradox",
+      "author": "Dr. Robert Chang",
+      "publishedDate": "2023-07-05",
+      "availableCopies": 7
+    },
+    {
+      "id": "978-0-007",
+      "title": "Whispers in the Wind",
+      "author": "Emily Brooks",
+      "publishedDate": "2023-05-18",
+      "availableCopies": 9
+    },
+    {
+      "id": "978-0-008",
+      "title": "The Art of Code",
+      "author": "David Kumar",
+      "publishedDate": "2023-08-01",
+      "availableCopies": 5
+    },
+    {
+      "id": "978-0-009",
+      "title": "Ocean's Memory",
+      "author": "Maria Santos",
+      "publishedDate": "2023-03-28",
+      "availableCopies": 6
+    },
+    {
+      "id": "978-0-010",
+      "title": "The Time Keeper",
+      "author": "Thomas Anderson",
+      "publishedDate": "2023-09-12",
+      "availableCopies": 4
+    },
+    {
+      "id": "978-0-011",
+      "title": "Forest of Secrets",
+      "author": "Laura Palmer",
+      "publishedDate": "2023-06-30",
+      "availableCopies": 7
+    },
+    {
+      "id": "978-0-012",
+      "title": "Urban Legends",
+      "author": "Marcus Wright",
+      "publishedDate": "2023-04-15",
+      "availableCopies": 3
+    },
+    {
+      "id": "978-0-013",
+      "title": "The Crystal Chamber",
+      "author": "Sophie Zhang",
+      "publishedDate": "2023-07-22",
+      "availableCopies": 8
+    },
+    {
+      "id": "978-0-014",
+      "title": "Desert Storm",
+      "author": "Ahmed Hassan",
+      "publishedDate": "2023-05-05",
+      "availableCopies": 5
+    },
+    {
+      "id": "978-0-015",
+      "title": "The Neural Path",
+      "author": "Dr. Sarah White",
+      "publishedDate": "2023-08-18",
+      "availableCopies": 6
+    },
+    {
+      "id": "978-0-016",
+      "title": "Starlight Boulevard",
+      "author": "Carlos Rivera",
+      "publishedDate": "2023-02-28",
+      "availableCopies": 4
+    },
+    {
+      "id": "978-0-017",
+      "title": "The Forgotten Room",
+      "author": "Victoria Black",
+      "publishedDate": "2023-09-30",
+      "availableCopies": 7
+    },
+    {
+      "id": "978-0-018",
+      "title": "Digital Dystopia",
+      "author": "Ryan Chen",
+      "publishedDate": "2023-01-25",
+      "availableCopies": 5
+    },
+    {
+      "id": "978-0-019",
+      "title": "The Last Algorithm",
+      "author": "Nina Patel",
+      "publishedDate": "2023-07-14",
+      "availableCopies": 6
+    },
+    {
+      "id": "978-0-020",
+      "title": "Mountain Whispers",
+      "author": "John Drake",
+      "publishedDate": "2023-04-08",
+      "availableCopies": 4
+    }
+  ]
+}
