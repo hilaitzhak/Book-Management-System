@@ -1,6 +1,6 @@
 import express, { Express } from "express";
 import cors from "cors";
-import { AppRouter } from "./routes/book.router";
+import { BookRouter } from "./routes/book.router";
 
 export class AppServer {
     public app: Express;
@@ -20,11 +20,10 @@ export class AppServer {
         this.app.use(cors());
         this.app.use(express.json());
     }
-
     
     private setRouter() {
-        const app_router = new AppRouter();
-        this.app.use('/', app_router.getRouter());
+        const app_router = new BookRouter();
+        this.app.use('/books', app_router.getRouter());
     }
     
     public listen() {

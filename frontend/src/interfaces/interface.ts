@@ -8,7 +8,6 @@ export interface Book {
     availableCopies: number;
 }
 
-
 export interface BookFormData {
     title: string;
     author: string;
@@ -43,4 +42,12 @@ export interface BookListProps {
 export interface SearchBarProps {
     value: string;
     onChange: (value: string) => void;
+}
+
+export interface BookModalProps {
+    modalContent: 'add' | 'edit' | 'view' | null;
+    selectedBook: Book | null;
+    onClose: () => void;
+    onUpdate: (bookData: BookFormData) => Promise<void>;
+    onAdd: (bookData: BookFormData) => Promise<void>;
 }

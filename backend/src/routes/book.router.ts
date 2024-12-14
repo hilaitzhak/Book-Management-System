@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { BookController } from "../controllers/book.controller";
 
-export class AppRouter {
+export class BookRouter {
     private router: Router;
     private bookController: BookController;
     
@@ -24,10 +24,11 @@ export class AppRouter {
     }
 
     private setRoutes() {
-        this.router.get('/books', this.bookController.getAllBooks.bind(this.bookController));
-        this.router.get('/books/:id', this.bookController.getBookDetailsById.bind(this.bookController));
-        this.router.put('/books/:id', this.bookController.updateBookDetails.bind(this.bookController));
-        this.router.delete('/books/:id', this.bookController.deleteBook.bind(this.bookController));
+        this.router.post('/', this.bookController.addNewBook.bind(this.bookController));
+        this.router.get('/', this.bookController.getAllBooks.bind(this.bookController));
+        this.router.get('/:id', this.bookController.getBookDetailsById.bind(this.bookController));
+        this.router.put('/:id', this.bookController.updateBookDetails.bind(this.bookController));
+        this.router.delete('/:id', this.bookController.deleteBook.bind(this.bookController));
     }
     
     public getRouter(): Router {

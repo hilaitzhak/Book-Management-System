@@ -1,16 +1,14 @@
 import { useEffect, useState } from 'react'
 import { Book, BookFormData } from './interfaces/interface';
 import BookList from './components/BookList';
-import Modal from './components/Modal';
-import BookDetails from './components/BookDetails';
-import BookForm from './components/BookForm';
 import SearchBar from './components/SearchBar';
+import BookModal from './components/BookModal';
 
 const App = () => {
   const [books, setBooks] = useState<Book[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedBook, setSelectedBook] = useState<Book | null>(null);
-  const [modalContent, setModalContent] = useState<'add' | 'edit' | 'view' | null>(null);
+  const [modalContent, setModalContent] = useState<'add' | 'edit' | 'view' | null>(null); // Determines which modal is open
 
   useEffect(() => {
     fetchBooks();
@@ -36,7 +34,8 @@ const App = () => {
           id: `978-0-${Math.random().toString().slice(2, 5)}`,
         }),
       });
-      fetchBooks();
+
+      await fetchBooks();
       setModalContent(null);
     } catch (error) {
       console.error('Error adding book:', error);
@@ -62,7 +61,7 @@ const App = () => {
     if (!confirm('Are you sure you want to delete this book?')) return;
     try {
       await fetch(`http://localhost:3000/books/${id}`, { method: 'DELETE' });
-      fetchBooks();
+      await fetchBooks();
     } catch (error) {
       console.error('Error deleting book:', error);
     }
@@ -74,9 +73,9 @@ const App = () => {
   );
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="w-full px-8 py-8">
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold">Book Management</h1>
+        <h1 className="text-3xl font-bold">Book Management System</h1>
         <button
           onClick={() => {
             setSelectedBook(null);
@@ -89,43 +88,28 @@ const App = () => {
       </div>
 
       <SearchBar value={searchQuery} onChange={setSearchQuery} />
+      <div className='w-full'>
+        <BookList
+          books={filteredBooks}
+          onEdit={(book: Book) => {
+            setSelectedBook(book);
+            setModalContent('edit');
+          }}
+          onDelete={handleDeleteBook}
+          onView={(book: Book) => {
+            setSelectedBook(book);
+            setModalContent('view');
+          }}
+        />
+      </div>
 
-      <BookList
-        books={filteredBooks}
-        onEdit={(book: Book) => {
-          setSelectedBook(book);
-          setModalContent('edit');
-        }}
-        onDelete={handleDeleteBook}
-        onView={(book: Book) => {
-          setSelectedBook(book);
-          setModalContent('view');
-        }}
+      <BookModal
+        modalContent={modalContent}
+        selectedBook={selectedBook}
+        onClose={() => setModalContent(null)}
+        onUpdate={handleUpdateBook}
+        onAdd={handleAddBook}
       />
-
-      {modalContent && (
-        <Modal
-          title={
-            modalContent === 'add' ? 'Add New Book' :
-            modalContent === 'edit' ? 'Edit Book' :
-            'Book Details'
-          }
-          onClose={() => setModalContent(null)}
-        >
-          {modalContent === 'view' ? (
-            <BookDetails
-              book={selectedBook!}
-              onClose={() => setModalContent(null)}
-            />
-          ) : (
-            <BookForm
-              book={modalContent === 'edit' ? selectedBook : undefined}
-              onSubmit={modalContent === 'edit' ? handleUpdateBook : handleAddBook}
-              onCancel={() => setModalContent(null)}
-            />
-          )}
-        </Modal>
-      )}
     </div>
   );
 };

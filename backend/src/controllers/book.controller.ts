@@ -1,4 +1,6 @@
 import { Request, Response } from "express";
+import { UtilBook } from "../utils/book.utils";
+import { BookError } from "../models/error";
 import { BookService } from "../services/book.service";
 
 export class BookController {
@@ -17,6 +19,23 @@ export class BookController {
         }
     }
 
+    public async addNewBook(req: Request, res: Response): Promise<void> {
+        try {
+            const bookData = req.body;
+            const { author, title, availableCopies } = bookData;
+            UtilBook.validateBookDetails(author, title, availableCopies);
+    
+            const newBook = await this.bookService.addNewBook(bookData);
+            res.status(201).json(newBook);
+        } catch (error) {
+            if(error instanceof BookError) {
+                res.status(error.statusCode).json({error: error.message});
+            }
+            console.error('Controller error in addBook:', error);
+            res.status(500).json({ error: 'Internal server error' });
+        }
+    }
+
     public async getBookDetailsById(req: Request, res: Response): Promise<void> {
         try {
             const { id } = req.params;
@@ -24,11 +43,10 @@ export class BookController {
             res.json(book);
         } catch (error) {
             console.error('Controller error in getBookDetailsById:', error);
-            if (error.message === 'Book not found') {
-                res.status(404).json({ error: 'Book not found' });
-            } else {
-                res.status(500).json({ error: 'Internal server error' });
+            if(error !instanceof BookError) {
+                error = new BookError();
             }
+            res.status(error.statusCode).json({error: error.message});
         }
     }
 
@@ -36,32 +54,32 @@ export class BookController {
         try {
             const { id } = req.params;
             const bookData = req.body;
+            const { author, title, availableCopies } = bookData;
+            UtilBook.validateBookDetails(author, title, availableCopies);
+     
             const updatedBook = await this.bookService.updateBookDetails(id, bookData);
             res.json(updatedBook);
+     
         } catch (error) {
             console.error('Controller error in updateBookDetails:', error);
-            if (error.message === 'Book not found') {
-                res.status(404).json({ error: 'Book not found' });
-            } else {
-                res.status(500).json({ error: 'Internal server error' });
+            if(error !instanceof BookError) {
+                error = new BookError();
             }
+            res.status(error.statusCode).json({error: error.message});
         }
     }
 
-    public async deleteBook(req: Request, res: Response) {
+    public async deleteBook(req: Request, res: Response): Promise<void> {
         try {
             const { id } = req.params;
             await this.bookService.deleteBook(id);
             res.status(204).send();
         } catch (error) {
             console.error('Controller error in deleteBook:', error);
-            if (error.message === 'Book not found') {
-                res.status(404).json({ error: 'Book not found' });
-            } else {
-                res.status(500).json({ error: 'Internal server error' });
+            if(error !instanceof BookError) {
+                error = new BookError();
             }
+            res.status(error.statusCode).json({error: error.message});
         }
     }
-
-    
 }
